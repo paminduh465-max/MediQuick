@@ -1,0 +1,8 @@
+{
+  "name": "Remix MediQuick Pharmacy",
+  "description": "Online pharmacy management platform for MediQuick Pharmacy (Kurunegala) featuring prescription verification, medicine catalog, order fulfillment, role-based dashboards, and academic system report.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
