@@ -7,7 +7,9 @@ import {
   Mail, 
   Clock, 
   FileText, 
-  AlertCircle 
+  AlertCircle,
+  Github,
+  ExternalLink
 } from 'lucide-react';
 import { usePharmacy } from '../context/PharmacyContext';
 
@@ -86,6 +88,29 @@ export const Footer: React.FC = () => {
                   Project Report & Site Map
                 </button>
               </li>
+              <li className="pt-2 border-t border-slate-800">
+                <a 
+                  href="https://paminduh465-max.github.io/MediQuick/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-medium transition-colors"
+                >
+                  <Github className="w-3.5 h-3.5" />
+                  <span>GitHub Pages Live</span>
+                  <ExternalLink className="w-2.5 h-2.5 opacity-60" />
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://github.com/paminduh465-max/MediQuick" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors"
+                >
+                  <Github className="w-3.5 h-3.5" />
+                  <span>GitHub Repository</span>
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -141,6 +166,16 @@ export const Footer: React.FC = () => {
           </div>
           <div className="flex items-center gap-4">
             <span className="text-slate-400">Coursework Application & Web System Documentation Assessment</span>
+            <span className="text-slate-700">•</span>
+            <a 
+              href="https://paminduh465-max.github.io/MediQuick/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-emerald-400 hover:underline flex items-center gap-1"
+            >
+              <Github className="w-3 h-3" />
+              <span>paminduh465-max.github.io/MediQuick</span>
+            </a>
           </div>
         </div>
 

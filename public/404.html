@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediQuick Pharmacy - Redirecting...</title>
+    <script>
+      // Single Page Application redirect for GitHub Pages
+      // If someone accesses a deep link or subpath that 404s, redirect back to root of app
+      sessionStorage.redirect = location.href;
+      var path = window.location.pathname;
+      var repo = '/MediQuick/';
+      if (path.startsWith(repo)) {
+        window.location.replace(repo);
+      } else {
+        window.location.replace('./');
+      }
+    </script>
+  </head>
+  <body style="font-family: system-ui, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #0f172a; color: #f8fafc;">
+    <div style="text-align: center; padding: 20px;">
+      <h2 style="color: #10b981; margin-bottom: 8px;">MediQuick Pharmacy</h2>
+      <p style="color: #94a3b8; font-size: 14px;">Redirecting to application...</p>
+    </div>
+  </body>
+</html>

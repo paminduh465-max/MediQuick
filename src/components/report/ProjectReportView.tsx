@@ -17,7 +17,8 @@ import {
   Layout, 
   Cpu, 
   AlertCircle,
-  ExternalLink
+  ExternalLink,
+  Github
 } from 'lucide-react';
 import { usePharmacy } from '../../context/PharmacyContext';
 
@@ -96,7 +97,7 @@ export const ProjectReportView: React.FC = () => {
           </div>
 
           {/* Student & Project Metadata Box */}
-          <div className="bg-emerald-50 rounded-3xl border border-emerald-200 p-5 text-xs text-emerald-950 space-y-2">
+          <div className="bg-emerald-50 rounded-3xl border border-emerald-200 p-5 text-xs text-emerald-950 space-y-3">
             <h4 className="font-bold flex items-center gap-1.5 text-emerald-900">
               <CheckCircle2 className="w-4 h-4 text-emerald-700" />
               <span>Project Assessment Metadata</span>
@@ -107,6 +108,37 @@ export const ProjectReportView: React.FC = () => {
               <p><strong>Target Architecture:</strong> Full-Stack React / Vite SPA with Offline Persistence</p>
               <p><strong>Regulatory Standard:</strong> Sri Lanka NMRA Act No. 5 of 2015</p>
               <p><strong>Assessment Criterion:</strong> Originality, Functional Quality & Documentation</p>
+            </div>
+
+            <div className="pt-2 border-t border-emerald-200/80 space-y-1.5">
+              <span className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider block">
+                Repository & Live Deployment
+              </span>
+              <a 
+                href="https://paminduh465-max.github.io/MediQuick/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between p-2 rounded-xl bg-white border border-emerald-200 text-emerald-800 font-bold hover:bg-emerald-100/60 transition-all text-[11px]"
+              >
+                <div className="flex items-center gap-1.5 truncate">
+                  <Github className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                  <span className="truncate">paminduh465-max.github.io/MediQuick</span>
+                </div>
+                <ExternalLink className="w-3 h-3 shrink-0 text-emerald-600" />
+              </a>
+
+              <a 
+                href="https://github.com/paminduh465-max/MediQuick"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between p-2 rounded-xl bg-emerald-100/50 hover:bg-emerald-100 text-emerald-900 font-medium transition-all text-[11px]"
+              >
+                <div className="flex items-center gap-1.5 truncate">
+                  <Github className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                  <span className="truncate">GitHub Repository</span>
+                </div>
+                <ExternalLink className="w-3 h-3 shrink-0 text-emerald-600" />
+              </a>
             </div>
           </div>
         </div>
@@ -386,6 +418,84 @@ export const ProjectReportView: React.FC = () => {
                     <li><code>StaffMember</code>: id, name, role, slmcLicense, email, phone, status, shift.</li>
                     <li><code>AuditLog</code>: id, timestamp, action, actor, role, severity, details.</li>
                   </ul>
+                </div>
+
+                {/* 5.2 GitHub Pages Deployment & CI/CD Section */}
+                <div className="p-5 bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-3xl border border-slate-700 space-y-4">
+                  <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-700/80 pb-3">
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                        <Github className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-bold text-white">
+                          5.2 GitHub Pages Deployment & Hosting Architecture
+                        </h4>
+                        <p className="text-[11px] text-slate-400">
+                          Automated CI/CD workflow configured for: <code className="text-emerald-300">paminduh465-max.github.io/MediQuick/</code>
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <a 
+                        href="https://paminduh465-max.github.io/MediQuick/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-colors shadow-sm"
+                      >
+                        <span>Open Live Site</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                      <a 
+                        href="https://github.com/paminduh465-max/MediQuick"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-medium text-xs transition-colors"
+                      >
+                        <span>GitHub Repo</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Why it was failing & Resolution Explanation */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                    <div className="p-3.5 bg-slate-800/80 rounded-2xl border border-rose-500/30 space-y-1.5">
+                      <span className="font-bold text-rose-300 flex items-center gap-1.5">
+                        <AlertCircle className="w-3.5 h-3.5 text-rose-400" />
+                        Root Cause (Why 404 / Blank Screen occurred):
+                      </span>
+                      <ul className="list-disc list-inside space-y-1 text-slate-300 text-[11px]">
+                        <li><strong>Missing Base URL:</strong> Vite defaulted to root <code>/</code>, requesting bundles at <code>domain/assets/...</code> instead of subfolder <code>/MediQuick/assets/...</code>.</li>
+                        <li><strong>Uncompiled Raw Files:</strong> Direct GitHub Pages serving without GitHub Actions attempted to load uncompiled <code>/src/main.tsx</code> raw TypeScript.</li>
+                      </ul>
+                    </div>
+
+                    <div className="p-3.5 bg-slate-800/80 rounded-2xl border border-emerald-500/30 space-y-1.5">
+                      <span className="font-bold text-emerald-300 flex items-center gap-1.5">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                        Permanent Architectural Solution Implemented:
+                      </span>
+                      <ul className="list-disc list-inside space-y-1 text-slate-300 text-[11px]">
+                        <li><strong>Relative Asset Resolution:</strong> Configured <code>base: './'</code> in <code>vite.config.ts</code> for flawless routing under subpaths.</li>
+                        <li><strong>Automated CI/CD Workflow:</strong> Added <code>.github/workflows/deploy.yml</code> for automated GitHub Pages builds.</li>
+                        <li><strong>Jekyll & SPA Bypass:</strong> Added <code>public/.nojekyll</code> and <code>public/404.html</code> fallbacks.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Quick Activation Checklist */}
+                  <div className="p-3.5 bg-slate-800/60 rounded-2xl border border-slate-700/80 text-[11px] space-y-2">
+                    <span className="font-bold text-emerald-400 uppercase tracking-wider block">
+                      3 Steps to Activate in GitHub Settings:
+                    </span>
+                    <ol className="list-decimal list-inside space-y-1 text-slate-300">
+                      <li>Commit and push the project changes to your GitHub repository (<code>main</code> branch).</li>
+                      <li>In your GitHub repo, go to <strong>Settings</strong> &rarr; <strong>Pages</strong>.</li>
+                      <li>Under <strong>Build and deployment &gt; Source</strong>, select <strong>GitHub Actions</strong>. GitHub will automatically run the build and publish the live site to <code className="text-emerald-300">https://paminduh465-max.github.io/MediQuick/</code>.</li>
+                    </ol>
+                  </div>
                 </div>
               </div>
             </div>
