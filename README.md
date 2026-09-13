@@ -9,26 +9,30 @@ MediQuick Pharmacy is an online pharmacy management platform designed for Kurune
 
 ## 🚀 GitHub Pages Deployment (Fixing 404 / Blank Screen)
 
-If `https://paminduh465-max.github.io/MediQuick/` was previously showing a 404 or blank white screen, this was caused by:
-1. **Missing Base Path**: Vite default output was resolving assets from `/assets/` instead of `/MediQuick/assets/` (fixed by adding `base: './'` in `vite.config.ts`).
-2. **Missing Build/Publish Workflow**: GitHub Pages serves files only when a build workflow is configured or when the compiled `dist/` directory is published.
+If `https://paminduh465-max.github.io/MediQuick/` was previously showing a 404 or blank white screen, or if GitHub Actions Run #1 failed:
 
-### Option 1: Automatic Deployment via GitHub Actions (Recommended)
-This repository includes `.github/workflows/deploy.yml` which automatically builds and deploys on every push:
-1. Go to your repository on GitHub: `https://github.com/paminduh465-max/MediQuick`
-2. Click **Settings** > **Pages** (in the left sidebar).
-3. Under **Build and deployment** > **Source**, choose **GitHub Actions**.
-4. Push any commit to `main` (or trigger the workflow from the **Actions** tab).
-5. The live site will deploy automatically at:  
+### Why GitHub Actions Run #1 Failed & What Was Fixed:
+1. **Missing Lockfile in `setup-node` cache:** The previous workflow configured `cache: 'npm'`, which crashes with `Dependencies lock file is not found` if `package-lock.json` is not committed. We generated `package-lock.json` and removed the rigid cache constraint so the step always passes.
+2. **Dual Deployment Support:** GitHub repositories default to `Deploy from a branch` rather than `GitHub Actions`. The updated workflow now automatically pushes the compiled bundle to the `gh-pages` branch **and** attempts direct GitHub Pages deployment, ensuring successful hosting regardless of repository settings.
+3. **Workflow Permissions:** Added `contents: write`, `pages: write`, and `id-token: write` permissions required for Pages deployment and branch publishing.
+
+### How to Deploy (Choose Either Option):
+
+#### Option A: Automatic via GitHub Actions (Recommended)
+1. In your GitHub repo (`https://github.com/paminduh465-max/MediQuick`), go to **Settings** > **Pages**.
+2. Under **Build and deployment > Source**:
+   - If you select **GitHub Actions**: The workflow will deploy directly.
+   - If you select **Deploy from a branch**: Select branch **`gh-pages`** and folder **`/ (root)`** and click Save.
+3. In your repo's **Actions** tab, click on the **Deploy to GitHub Pages** workflow and click **Run workflow** (or simply push a new commit).
+4. The live site will be ready at:  
    **[https://paminduh465-max.github.io/MediQuick/](https://paminduh465-max.github.io/MediQuick/)**
 
-### Option 2: Deploy via CLI using gh-pages
-You can also deploy directly using npm:
+#### Option B: Deploy from Command Line via npm
 ```bash
 npm install
 npm run deploy
 ```
-This runs `npm run build` and automatically pushes the contents of `dist/` to the `gh-pages` branch on GitHub. Then in GitHub **Settings > Pages**, set **Source** to **Deploy from a branch** and select `gh-pages` / `root`.
+This builds the application and pushes the compiled `dist/` directory to your repository's `gh-pages` branch automatically. In GitHub **Settings > Pages**, set **Source** to **Deploy from a branch** (`gh-pages` / `root`).
 
 ---
 
