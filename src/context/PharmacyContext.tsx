@@ -22,7 +22,7 @@ import {
   INITIAL_AUDIT_LOGS
 } from '../data/mockData';
 
-export type MainNavTab = 'welcome' | 'customer' | 'staff' | 'admin' | 'report';
+export type MainNavTab = 'welcome' | 'customer' | 'staff' | 'admin' | 'report' | 'advice';
 
 interface PharmacyContextType {
   // Navigation & Role
@@ -123,7 +123,7 @@ function saveToStorage<T>(key: string, value: T): void {
 }
 
 export const PharmacyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [currentTab, setCurrentTab] = useState<MainNavTab>(() => loadFromStorage('currentTab', 'welcome'));
+  const [currentTab, setCurrentTab] = useState<MainNavTab>(() => loadFromStorage('currentTab', 'advice'));
   const [userRole, setUserRole] = useState<UserRole>('customer');
   const [currentUser, setCurrentUser] = useState<CurrentUser | null>(() => loadFromStorage('currentUser', null));
   

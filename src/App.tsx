@@ -35,7 +35,7 @@ const PharmacyAppContent: React.FC = () => {
       <Header />
 
       {/* Main Content Viewport */}
-      <main className={`flex-1 w-full ${currentTab === 'welcome' ? '' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8'}`}>
+      <main className={`flex-1 w-full ${currentTab === 'welcome' || currentTab === 'advice' ? '' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8'}`}>
         
         {/* TAB 0: WELCOME & ONBOARDING PORTAL */}
         {currentTab === 'welcome' && <WelcomePage />}
@@ -114,6 +114,13 @@ const PharmacyAppContent: React.FC = () => {
 
         {/* TAB 4: SYSTEM DOCUMENTATION REPORT & SITE MAP */}
         {currentTab === 'report' && <ProjectReportView />}
+
+        {/* TAB 5: MEDICAL ADVICE & EMERGENCY CARE HUB (FORMAT FROM MOCKUP) */}
+        {currentTab === 'advice' && (
+          <div className="space-y-6">
+            <HealthHub />
+          </div>
+        )}
 
       </main>
 

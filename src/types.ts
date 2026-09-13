@@ -165,3 +165,28 @@ export interface AuditLog {
   details: string;
   severity: 'info' | 'warning' | 'critical';
 }
+
+export type AdviceCategory = 
+  | 'emergency_first_aid'
+  | 'personal_care_advice'
+  | 'skin_care'
+  | 'communicable_diseases'
+  | 'non_communicable_diseases';
+
+export interface MedicalAdviceItem {
+  id: string;
+  category: AdviceCategory;
+  categoryLabel: string;
+  title: string;
+  subtitle: string;
+  iconName?: string;
+  severity: 'emergency' | 'warning' | 'guideline';
+  urgencyLabel: string;
+  summary: string;
+  symptoms?: string[];
+  immediateSteps: string[];
+  doNotList?: string[];
+  recommendedSupplies?: string[];
+  kurunegalaContext?: string;
+  reviewedBy: string;
+}
